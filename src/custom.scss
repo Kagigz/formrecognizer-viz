@@ -1,0 +1,421 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+$accent-light: #9a9da0;
+$accent-dark: #343a40;
+
+body{
+    color:$accent-dark;
+}
+
+
+a:hover{
+    text-decoration: none;
+}
+
+/* GENERAL */
+
+.page{
+    //padding: 30px 20px;
+}
+
+.popup-overlay {  
+    position: fixed;  
+    width: 100%;  
+    height: 100%;  
+    top: 0;  
+    left: 0;    
+    margin: auto;  
+    background-color: rgba(0,0,0, 0.5);  
+    z-index:10;
+}  
+
+.popup-window {  
+    position: absolute;  
+    background: $accent-dark;  
+    color:white;
+    top: 50%;  
+    left: 50%;
+    transform:translate(-50%,-50%);
+    z-index:11;
+
+    .btn{
+        background-color:$accent-light;
+    }
+
+}
+
+.popup-inner {
+    position:relative;
+    text-align:center;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:12;
+}
+
+.popup-title{
+    margin-bottom: 30px;
+}
+
+.popup-text{
+    padding: 30px 10px;
+}
+
+.popup-buttons{
+    position:absolute;
+    left:50%;
+    bottom:20px;
+    transform:translate(-50%,0);
+}
+
+.confirm-box{
+
+    width: 400px;
+    height:150px;
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        width:100%;
+        height:30vh;
+    }
+
+    .confirm-text{
+        font-size:1.1em;
+    }
+
+    .btn{
+        margin: 10px 10px 0px 10px;
+    }
+
+}
+
+.close-popup{
+    position: relative;
+    top:-20px;
+    right:-568px;
+    transform:translate(-100%,-100%);
+    z-index:13;
+    background-color:$accent-light!important;
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        width:100%;
+        transform:translate(-50%,0);
+        top: 0px;
+        left:50%;
+    }
+
+}
+
+
+
+/* MANAGE */
+
+.addBtn{
+    text-align:center;
+    margin-top: 40px;
+
+    path { 
+        fill: $accent-dark; 
+        cursor:pointer;
+    }
+
+}
+
+.subscriptionKeyField{
+
+    margin-top:60px;
+    margin-left:10%;
+    margin-right:10%;
+    text-align: center;
+    background-color:$accent-light;
+    padding:40px 20px;
+    color:white;
+    box-shadow: 0px 2px 10px 0px #d7d7d7;
+
+    .labelField{
+        text-align:left;
+        padding-bottom: 10px;
+    }
+
+    .keyLabel{
+        font-size:1.2em;
+        font-weight: 600;
+    }
+
+    .btn-lg{
+        padding:20px 25px;
+    }
+}
+
+.list{
+    margin-top:40px;
+    margin-left:20%;
+    margin-right:20%;
+}
+
+.list-item{
+
+    background-color: white;
+    margin-bottom: 20px;
+    padding:10px 0px;
+    box-shadow: 0px 2px 10px 0px #d7d7d7;
+    height:auto;
+
+    path { 
+        fill: $accent-dark; 
+    }
+
+    .IDlabel{
+        font-weight: 600;
+        font-size:0.9em;
+    }
+
+    .viewDetailsBtn{
+        font-size:0.75em;
+        text-align:right;
+        cursor:pointer;
+    }
+
+    .deleteBtn{
+        cursor:pointer;
+    }
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        text-align:center;
+    }
+
+}
+
+.details-box{
+
+    width:600px;
+    height:600px;
+
+    .scrollbar
+    {
+        float: right;
+        height:100%;
+        overflow-y: scroll;
+        width:100%;
+    }
+
+    .scrollbar::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px #d7d7d7;
+        background-color:$white;
+    }
+
+    .scrollbar::-webkit-scrollbar
+    {
+        width: 12px;
+        background-color: $white;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb
+    {
+        -webkit-box-shadow: inset 0 0 6px #d7d7d7;
+        background-color: $accent-light;
+    }
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        width:100%;
+        height:70vh;
+    }
+
+}
+
+.create-new{
+    width:620px;
+    min-height:400px;
+
+    padding-left:20px;
+    padding-right:20px;
+
+    .popup-text{
+        margin-bottom: 30px;
+    }
+
+    .labelField{
+        text-align: left;
+        font-weight:500;
+        margin-bottom:5px;
+        margin-top:20px;
+    }
+    
+    .textCreateNew{
+        text-align: justify;
+    }
+
+    .useFolderLabel{
+        text-align: left;
+        font-size:0.8em;
+        cursor:pointer;
+        margin-top:5px;
+        color:$accent-light;
+    }
+
+    .btn{
+        margin: 10px 10px 0px 10px;
+    }
+
+    input{
+        float: left;
+        width:100%;
+    }
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        width:100%;
+        height:70vh;
+    }
+}
+
+/* ANALYZE */
+
+.inputFile{
+
+    margin-top:60px;
+    margin-right:0;
+    width:100%;
+    //margin-left:10%;
+    //margin-right:10%;
+    text-align: center;
+    background-color:$accent-dark;
+    padding:40px 20px;
+    color:white;
+    //box-shadow: 0px 2px 10px 0px #d7d7d7;
+
+
+    .labelField{
+        text-align:right;
+        padding-bottom: 10px;
+        padding-top:20px;
+    }
+
+    .keyLabel{
+        font-size:1.2em;
+        font-weight: 600;
+        padding-top:20px;
+    }
+
+    .btn-lg{
+        background-color:$accent-light;
+        padding:20px 25px;
+    }
+
+    .form-control{
+        margin-top:10px;
+    }
+
+    .checkboxField{
+        width:100vw;
+        margin-top:20px;
+    }
+
+    .checkbox{
+        margin-right:10px;
+        transform:translate(0,20%);
+        width:15px;
+        height:15px;
+    }
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        .labelField{
+            text-align:left;
+            padding-bottom: 5px;
+            padding-top:20px;
+        }
+        .checkboxField{
+            text-align:left;
+        }
+
+        .btn{
+            margin-top:30px;
+        }
+    }
+
+}
+
+#imageAnalysis{
+    background-color:$accent-dark;
+    border: 2px solid $accent-light;
+  }
+  
+  #imageViewWrapper{
+    padding:0;
+  }
+
+  #canvasImageView{
+    width:100%;
+  }
+  
+  .imgDisplay{
+    display: none;
+  }
+  
+  /* INFO */
+
+  #info{
+      color:white;
+      text-align:center;
+      width:100%;
+      overflow-x:hidden;
+  }
+  
+  #infoTitle{
+    margin-bottom: 30px;
+    margin-top:20px;
+  }
+  
+  .infoSection{
+    margin-bottom:30px;
+  }
+  
+  #tagsList{
+    align-items:center;
+  }
+  
+  
+  .tag{
+    padding: 2px 5px;
+    background-color: $dark;
+    border-radius:3px;
+    margin: 10px;
+    width:fit-content;
+    color:white;
+    margin-left:50%;
+    transform:translate(-50%,0);
+  }
+  
+
+
+/* BOOTSTRAP OVERRIDE */
+
+.btn{
+    border-radius:0px;
+    border:none;
+    background-color:$accent-dark;
+    color:white;
+}
+
+.btn:hover{
+    background-color:white;
+    color:black;
+}
+
+.btn:focus{
+    box-shadow: none;
+}
+
+.form-control{
+    border-radius:0px;
+    padding:2px;
+
+    @media(max-width:map-get($grid-breakpoints,md)) {
+        margin-top:20px;
+        margin-bottom:20px;
+    }
+}
+
+.form-control:focus{
+    border: 1px solid $accent-dark;
+    box-shadow: 0px 0px 5px $accent-dark;
+}
