@@ -156,7 +156,7 @@ class ImageView extends React.Component{
         return (
         <div id="imageView">
             <canvas ref="canvas" id="canvasImageView"/>
-            <img ref="image" alt="" className="imgDisplay" src="https://katiastorage.blob.core.windows.net/dataset-test-adecco/S52_Page_13.jpg?sp=rl&st=2019-07-15T16:38:45Z&se=2019-10-24T16:38:00Z&sv=2018-03-28&sig=Bg6NE%2F9Gx9DvAE3Syoh51EWullsvonEihjI%2FUwsrsEs%3D&sr=b" />
+            <img ref="image" alt="" className="imgDisplay" src="" />
         </div>
         )
     }

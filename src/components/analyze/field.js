@@ -1,5 +1,7 @@
 import React from 'react';
 
+const uuid = require('uuid/v1');
+
 class Field extends React.Component{
 
 
@@ -27,7 +29,7 @@ class Field extends React.Component{
                 elements.push(JSON.stringify(field.elements[i]));
             }
 
-            refs = elements.map(e => <div>{e}</div>);
+            refs = elements.map(e => <div key={uuid()}>{e}</div>);
         }
     
         return (
