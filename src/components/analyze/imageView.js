@@ -21,15 +21,7 @@ class ImageView extends React.Component{
     }
 
     drawRectangle = (coord,ctx,width,height,img,color,border) => {
-
-        let x = Math.round(coord[6]*width/img.width);
-        let y = height - Math.round(coord[7]*height/img.height);
-        let w = Math.round(coord[4]*width/img.width) - x;
-        let h = height - Math.round(coord[1]*height/img.height) - y;
-
-       // console.log(`x: ${x} y: ${y} w: ${w} h: ${h}`);
-
-        
+      
         let ratioX = width/img.width;
         let ratioY = height/img.height;
 
@@ -106,8 +98,8 @@ class ImageView extends React.Component{
         const canvas = this.refs.canvas;
         const ctx = canvas.getContext("2d");
 
-        var reader = new FileReader();
         const img = this.refs.image;
+        var reader = new FileReader();
         reader.onload = () => {
             img.src = reader.result;
         }
@@ -164,7 +156,7 @@ class ImageView extends React.Component{
         return (
         <div id="imageView">
             <canvas ref="canvas" id="canvasImageView"/>
-            <img ref="image" alt="" className="imgDisplay" src="" />
+            <img ref="image" alt="" className="imgDisplay" src="https://katiastorage.blob.core.windows.net/dataset-test-adecco/S52_Page_13.jpg?sp=rl&st=2019-07-15T16:38:45Z&se=2019-10-24T16:38:00Z&sv=2018-03-28&sig=Bg6NE%2F9Gx9DvAE3Syoh51EWullsvonEihjI%2FUwsrsEs%3D&sr=b" />
         </div>
         )
     }

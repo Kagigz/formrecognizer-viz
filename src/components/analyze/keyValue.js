@@ -5,14 +5,20 @@ class KeyValue extends React.Component{
 
 
     render(){
-        var text = "";
-        if(this.props.item.length > 0 ){
-            text = this.props.item[0]["text"];
+        var key = "   ";
+        if(this.props.item.key.length > 0 ){
+            key = this.props.item.key[0]["text"];
+        }
+        var value = "   ";
+        if(this.props.item.value.length > 0 ){
+            value = this.props.item.value[0]["text"];
         }
     
         return (
             <span className="keyValue">
-                {text}
+                <span className="key">{key}</span>
+                <span className="value">{value}</span>
+                <span className="delete-key-value">x</span>
             </span>
         )
     }

@@ -56,14 +56,15 @@ class NewModel extends React.Component {
                             :
                             <input type="file" ref={(ref) => this.upload = ref} onChange={this.chooseFolder}  webkitdirectory="" directory="" multiple/>
                         }
-                        <div className='useFolderLabel'>
+                        {/*<div className='useFolderLabel'>
                             <span onClick={this.changeInput}>
                                 {this.state.uri ?
                                     "Use local files instead":
                                     "Use blob storage URI instead"
                                 }
                             </span>
-                        </div>
+                        </div>*/
+                        }
 
                     </div> :
 

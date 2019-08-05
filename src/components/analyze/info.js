@@ -1,6 +1,7 @@
 import React from 'react';
 import KeyValue from './keyValue';
 import Field from './field';
+import Table from './table';
 
 const uuid = require('uuid/v1');
 
@@ -15,20 +16,16 @@ class Info extends React.Component{
 
         try{
             if(this.props.isReceipt === true){
-                for(let key of Object.keys(this.props.fieldsReceipt)){
-                    console.log(`${key} : ${JSON.stringify(this.props.fieldsReceipt[key])}`);
-                }
                 fields = Object.keys(this.props.fieldsReceipt)
-                    //.map(item => <Field key={uuid()} item={item}/>);
-                    .map(item => <div key={uuid()}>{item}: {JSON.stringify(this.props.fieldsReceipt[item])}</div>);
+                    .map(item => <Field key={uuid()} item={item} field={this.props.fieldsReceipt[item]}/>);
                 lines = this.props.linesReceipt
-                    .map(item => <div key={uuid()}>{item['text']}</div>);
+                    .map(item => <div className="line" key={uuid()}>{item['text']}</div>);
             }
             else{
                 keyValuePairs = this.props.keyValuePairs
-                    .map(item => <div key={uuid()}><KeyValue item={item.key}/> - <KeyValue item={item.value}/></div>);
+                    .map(item => <KeyValue key={uuid()} item={item}/>);
                 tables = this.props.tables
-                    .map(item => <div key={uuid()}>{JSON.stringify(item)}</div>);
+                    .map(item => <Table key={uuid()} table={item}/>);
             }
         }
         catch(e){

@@ -15,6 +15,7 @@ class Analyze extends React.Component{
             analyzeDisplay:false,
             file:null,
             isReceipt:false,
+            intervalReceiptAnalysis:null,
             modelID:"",
             keyValuePairs:[],
             fieldsReceipt:[],
@@ -53,15 +54,9 @@ class Analyze extends React.Component{
         this.setState({isReceipt: !this.state.isReceipt});
     }
 
-    displayImage = () => {
-        var reader = new FileReader();
-    }
-
     analyzeFile = () => {
 
         if(this.state.subscriptionKey !== ""){
-
-            this.displayImage();
 
             if(this.state.isReceipt === true){
                 this.analyzeReceipt();
@@ -83,6 +78,8 @@ class Analyze extends React.Component{
         console.log("Analyzing receipt...");
         const apiURL = `https://${this.state.region}.api.cognitive.microsoft.com/formrecognizer/v1.0-preview/prebuilt/receipt/asyncBatchAnalyze`;
 
+        this.setState({receiptAnalyzed:false});
+
         fetch(apiURL, {
             method: 'POST',
             headers:{
@@ -95,19 +92,17 @@ class Analyze extends React.Component{
             return res.headers;
         })
         .then((results) => {
-            this.getAnalyzeReceiptResults(results.get('Operation-Location'));
+            this.setState({receiptOperationLocation:results.get('Operation-Location')});
+            this.setState({analyzingReceipt:true});
+            this.setState({intervalReceiptAnalysis:setInterval(() => this.getAnalyzeReceiptResults(results.get('Operation-Location')), 3000)});
         })
         .catch((error) => {
             console.error(error);
         });
-    }
-
-    sleep = (ms) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      
+    }      
 
     getAnalyzeReceiptResults = (url) => {
+
         console.log("Retrieving receipt results...");
 
         fetch(url, {
@@ -121,19 +116,19 @@ class Analyze extends React.Component{
         })
         .then((data) => {
             if(data['status'] === "Running"){
-                this.sleep(3000);
-                this.getAnalyzeReceiptResults(url);
                 console.log(data);
             }
             else{
                 console.log(data);
-                this.parseResultsReceipt(data);
+                this.parseResultsReceipt(data);               
+                clearInterval(this.state.intervalReceiptAnalysis);
             }
-            
         })
         .catch((error) => {
             console.error(error);
         });
+
+        return null;
     }
 
     analyzeForm = () => {
@@ -177,6 +172,8 @@ class Analyze extends React.Component{
     
     parseResultsReceipt = (result) => {
 
+        console.log("Parsing results of receipt analysis...");
+
         try{
             let recognition = result['recognitionResults'];
             let understanding = result['understandingResults'];
@@ -202,17 +199,18 @@ class Analyze extends React.Component{
             <div className="page">
 
                 <KeyField region={this.state.region} handleChangeInput={this.handleChangeInputKey} handleChangeSelect={this.handleChangeSelectRegion} handleOK={this.handleOK}/>
+
                 { this.state.pageDisplay ?
                     <InputFile handleChangeInputFile={this.handleChangeInputFile} handleChangeInputModelID={this.handleChangeInputModelID} handleChangeInputCheckbox={this.handleChangeInputCheckbox} analyzeFile={this.analyzeFile} isReceipt={this.state.isReceipt}/>:
                     ""
                 }
                 {this.state.analyzeDisplay ? 
-                <div className="container-fluid">
-                    <div className="row" id="imageAnalysis">
-                        <div className="col-md-9" id="imageViewWrapper">
+                <div>
+                    <div id="imageAnalysis">
+                        <div id="imageViewWrapper">
                             <ImageView file={this.state.file} isReceipt={this.state.isReceipt} linesReceipt={this.state.linesReceipt} keyValuePairs={this.state.keyValuePairs}/>
                         </div>
-                        <div className="col-md-3">
+                        <div>
                             <Info isReceipt={this.state.isReceipt} fieldsReceipt={this.state.fieldsReceipt} linesReceipt={this.state.linesReceipt} keyValuePairs={this.state.keyValuePairs} tables={this.state.tables}/>
                         </div>
                     </div>
